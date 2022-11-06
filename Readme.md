@@ -76,4 +76,17 @@ minikube service apache-service
   2. docker image ls
   3. docker login
   4. docker push hamzabedwi/k8s-webserver-node
+  5. create deployment pod k8s
+     1. kubectl create deployment k8s-webserver-node --image=hamzabedwi/k8s-webserver-node:tagname
+     2. kubectl get all
+     3. kubectl expose deployment k8s-webserver-node --port=3000
+     4. kubectl get svc
+     5. kubectl scale deployment k8s-webserver-node --replicas=6
+     6. Affiche (display) ip pods: kubectl get pods -o wide
+     7. connect to pods: minikube ssh
+     8. In Pod (docker@minikube): curl 172.17.0.5:300
+     9. Delete service (k8s-webserver-node): kubectl delete svc k8s-webserver-node
+     10. Modifier cmd to expose nodeport: kubectl expose deployment k8s-webserver-node --type=NodePort --port=3000
+     11. display service: kubectl get services
+     12. $> kubectl port-forward service/k8s-webserver-node 3001:3000      OU [$>minikube service k8s-webserver-node]
 
