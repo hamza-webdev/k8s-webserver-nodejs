@@ -158,4 +158,18 @@ kubectl get pods two-container-pod -o jsonpath='{.spec.containers[*].name}'
   9. curl hamzawebdev.io/app1
   10. curl hamzawebdev.io/app2
   ````
-##
+## create to container deploy ahly and zamalek
+```
+kubectl create deploy ahly --image=nginx
+kubectl create deploy zamalek --image=httpd
+kubectl expose deploy ahly --port=80
+kubectl expose deploy zamalek --port=80
+minikube ssh
+    sudo /bin/sh -c 'echo "192.168.49.2  ahly.io" >> /etc/hosts'
+    sudo /bin/sh -c 'echo "192.168.49.2  zamalek.io" >> /etc/hosts'
+kubectl create ingress sport-ingress --rule="ahly.io/=ahly:80" --rule="zamalek.io/=zamalek:80"
+kubectl get ingress
+to verify:
+    minikube ssh
+        curl ahly.io
+        curl zamalek.io
