@@ -1,9 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx
+  name: webserver
   labels:
-    name: nginx
+    env: production
+    owner: hamza
+    webserver: nginx
+    name: mon-nginx
+    contry: FRANCE
 spec:
   containers:
   - name: nginx
