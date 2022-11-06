@@ -97,7 +97,7 @@ minikube service apache-service
 ## afficher les info sur 2 container in One Pod
 
 kubectl get pods two-container-pod -o jsonpath='{.spec.containers[*].name}'
-````
+
 ## define driver in minikube
 1. minikube start --driver=docker
 
@@ -140,4 +140,24 @@ kubectl get pods two-container-pod -o jsonpath='{.spec.containers[*].name}'
     app2         NodePort    10.100.56.171   <none>        8080:31471/TCP   56s
     app3         NodePort    10.110.160.73   <none>        8080:30997/TCP   45s
     kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP          140m
+
+### display app 1, 2 and 3 via minikube
+
+  minikube service app1
+  minikube service app2
+  minikube service app3
+
+  1. apply file fanout to create Connection ingress to 3 app
+  2. kubectl apply -f fanout.yaml
+  3. kubectl describe ingress multiapp-ingress
+  OR
+  minikube dashboard
+  4. minikube ssh
+  5. config hosts to new dns: hamzawebdev.io
+  6. sudo /bin/sh -c 'echo "192.168.49.2  hamzawebdev.io" >> /etc/hosts'
+  7. cat /etc/hosts
+  8. Verifier curl for 3 app: $> curl hamzawebdev.io
+  9. curl hamzawebdev.io/app1
+  10. curl hamzawebdev.io/app2
   ````
+##
