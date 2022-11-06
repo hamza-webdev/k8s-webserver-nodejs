@@ -88,5 +88,9 @@ minikube service apache-service
      9. Delete service (k8s-webserver-node): kubectl delete svc k8s-webserver-node
      10. Modifier cmd to expose nodeport: kubectl expose deployment k8s-webserver-node --type=NodePort --port=3000
      11. display service: kubectl get services
-     12. $> kubectl port-forward service/k8s-webserver-node 3001:3000      OU [$>minikube service k8s-webserver-node]
+     12. $> kubectl port-forward service/k8s-webserver-node 3001:3000  OU [$>minikube service k8s-webserver-node]
+
+## Mettre a jor image docker to deploy k8s Update pod or app with strategy roll
+1. kubectl set image deploy k8s-webserver-node k8s-webserver-node=hamzabedwi/k8s-webserver-node:1.2.0
+2. kubectl rollout status deployment/k8s-webserver-node
 

@@ -10,6 +10,6 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () =>{
-    console.log(`web server listen at port ${PORT}`);
+    console.log(`web server listen at port ${PORT} Version V1.0.1`);
     console.log(`web server ==  ${os.hostname()}`);
 })
