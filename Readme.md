@@ -95,7 +95,7 @@ minikube service apache-service
 2. kubectl rollout status deployment/k8s-webserver-node
 
 ## afficher les info sur 2 container in One Pod
-````
+
 kubectl get pods two-container-pod -o jsonpath='{.spec.containers[*].name}'
 ````
 ## define driver in minikube
