@@ -126,4 +126,18 @@ kubectl get pods two-container-pod -o jsonpath='{.spec.containers[*].name}'
 1. kubectl delete pod,service baz foo
 
 ## Deploy Fanout Ingress in Kubernetes (3 Apps Inside Cluster)
-1.
+1. kubectl create deploy app1 --image=httpd:latest
+2. kubectl create deploy app2 --image=gcr.io/google-samples/hello-app:1.0
+3. kubectl create deploy app3 --image=gcr.io/google-samples/hello-app:2.0
+4. kubectl scale deploy app1 --replicas=3
+5. kubectl scale deploy app2 --replicas=4
+6. kubectl expose deploy app1 --port=80 --type=NodePort
+7. kubectl expose deploy app2 --port=8080 --type=NodePort
+8. display services with ip addresse: $> kubectl get svc
+9. ````
+    NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+    app1         NodePort    10.106.57.189   <none>        80:32608/TCP     77s
+    app2         NodePort    10.100.56.171   <none>        8080:31471/TCP   56s
+    app3         NodePort    10.110.160.73   <none>        8080:30997/TCP   45s
+    kubernetes   ClusterIP   10.96.0.1       <none>        443/TCP          140m
+  ````
