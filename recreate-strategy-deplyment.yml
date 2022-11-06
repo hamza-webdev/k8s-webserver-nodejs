@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recreate-deployment
+  labels:
+    app: helloserver
+spec:
+  selector:
+    matchLabels:
+      app: helloserver
+  replicas: 8
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: helloserver
+    spec:
+      containers:
+      - name: helloserver
+        image: hamzabedwi/k8s-webserver-node:1.5.0
+        ports:
+          - containerPort: 3000
