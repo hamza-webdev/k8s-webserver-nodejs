@@ -6,20 +6,22 @@ metadata:
   labels:
     app: "two-container-pod"
 spec:
-  containers:
-  - name: nginx-container
-    image: nginx
-    volumeMounts:
-    - name: shared-area
-      mountPath: /usr/share/nginx/html
-  - name: ubuntu-container
-    image: ubuntu
-    volumeMounts:
-      - name: shared-area
-        mountPath: /pod-area
-        command: ["/bin/sh"]
-        args: ["-c", "echo Hello from hamza-dev container > /pod-area/index.html"]
+  restartPolicy: Never
   volumes:
     - name: shared-area
       emptyDir: {}
-  restartPolicy: Never
+  containers:
+    - name: nginx-container
+      image: nginx
+      volumeMounts:
+      - name: shared-area
+        mountPath: /usr/share/nginx/html
+    - name: ubuntu-container
+      image: ubuntu
+      volumeMounts:
+        - name: shared-area
+          mountPath: "/pod-area"
+    # - command: ["/bash"]
+    #   args: ["-c", "echo Hello > /pod-area/index.html"]
+
+

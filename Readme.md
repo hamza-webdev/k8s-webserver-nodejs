@@ -94,3 +94,36 @@ minikube service apache-service
 1. kubectl set image deploy k8s-webserver-node k8s-webserver-node=hamzabedwi/k8s-webserver-node:1.2.0
 2. kubectl rollout status deployment/k8s-webserver-node
 
+## afficher les info sur 2 container in One Pod
+````
+kubectl get pods two-container-pod -o jsonpath='{.spec.containers[*].name}'
+````
+## define driver in minikube
+1. minikube start --driver=docker
+
+## display namespace in k8s
+1. kubectl get namespace
+
+## Ingress
+1. minikube addons enable ingress
+2. kubectl create deploy nginxservice --image=nginx:latest
+3. kubectl scale deploy nginxservice --replicas=4
+4. kubectl expose deploy nginxservice --port=80 --type=NodePort
+5. kubectl get service
+6. kubectl create ingress nginxservice-ingress --rule="/=nginxservice:80"
+7. minikube ip    //=>resultet: 192.168.49.2
+
+  ## configure file (/etc/hosts) hosts to minikube donner un domaine name for pod nginservice.io
+  1. minikub ssh
+  2. sudo bash -c 'echo "192.168.49.2 nginservice.io" >> /etc/hosts'
+  3. display file hosts: $> cat /etc/hosts
+  4. verifier la page nginx web via curk: $> curl nginservice.io
+
+## describe ingress*
+1. kubectl describe ingress nginxservice-ingress
+
+## Delete pods and services with same names "baz" and "foo"
+1. kubectl delete pod,service baz foo
+
+## Deploy Fanout Ingress in Kubernetes (3 Apps Inside Cluster)
+1.
