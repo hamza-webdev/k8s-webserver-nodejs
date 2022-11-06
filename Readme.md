@@ -208,3 +208,18 @@ spec:
 ## creer 2 container UBuntu1 and ubuntu2 with same volume: vol
 kubectl exec -it vols-demo -c ubuntu1 -- touch ubuntu1/test.text
 kubectl exec -it vols-demo -c ubuntu2 -- ls ubuntu2
+
+## Configuring Persistent Volumes in Kubernetes file: pv.yaml
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-storage
+spec:
+  capacity:
+    storage: 2Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/data"
