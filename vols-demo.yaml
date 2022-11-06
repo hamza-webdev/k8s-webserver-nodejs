@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "vols-demo"
+  labels:
+    app: "redis"
+spec:
+  containers:
+  - name: ubuntu1
+    image: "ubuntu"
+    command:
+      - sleep
+      - "3000"
+    volumeMounts:
+    - mountPath: /ubuntu1
+      name: vol
+  - name: ubuntu2
+    image: "ubuntu"
+    command:
+      - sleep
+      - "3000"
+    volumeMounts:
+    - mountPath: /ubuntu2
+      name: vol
+  volumes:
+    - name: vol
+      emptyDir: {}
+  restartPolicy: Always

@@ -176,3 +176,35 @@ to verify:
 ```
 ## Resetting Minikube Cluster | Kubernetes
 kubectl delete all --all -n default
+
+## Configure Pod to Use Volume for Storage file: redis.yaml
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "redis"
+  labels:
+    app: "redis"
+spec:
+  containers:
+  - name: redis
+    image: "redis"
+    volumeMounts:
+    - mountPath: /data/redis
+      name: redis-storage
+  volumes:
+    - name: redis-storage
+  restartPolicy: Always
+
+
+```
+1. kubectl apply -f redis.yaml
+2. dans un nouveau terminal execute cmd pour surveiller le volume pod: $> kubectl get pod redis --watch
+3. kubectl exec -it redis -- bash
+   1. (dans le conteaur redis) $> apt-get update
+   2. apt-get install procps
+   3. ps aux
+
+## creer 2 container UBuntu1 and ubuntu2 with same volume: vol
+kubectl exec -it vols-demo -c ubuntu1 -- touch ubuntu1/test.text
+kubectl exec -it vols-demo -c ubuntu2 -- ls ubuntu2
