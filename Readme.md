@@ -62,3 +62,18 @@ kubectl get pods -o wide
 # Voir tous info sur api resources
   * kubectl api-resources
 
+## Expose pods deployment/apache to connect out with declaraticve cmd
+````
+kubectl expose deployment apache-deployment --name=apache-service --type=ClusterIP --port=8080 --target-port=8080
+
+kubectl port-forward service/apache-service 8090:8080
+ou
+minikube service apache-service
+
+````
+# Dockorize notre application nodejs  dans dockerhub
+  1. docker build . -t hamzabedwi/k8s-webserver-node
+  2. docker image ls
+  3. docker login
+  4. docker push hamzabedwi/k8s-webserver-node
+
