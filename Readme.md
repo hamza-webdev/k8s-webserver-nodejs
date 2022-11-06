@@ -63,14 +63,13 @@ kubectl get pods -o wide
   * kubectl api-resources
 
 ## Expose pods deployment/apache to connect out with declaraticve cmd
-````
 kubectl expose deployment apache-deployment --name=apache-service --type=ClusterIP --port=8080 --target-port=8080
 
 kubectl port-forward service/apache-service 8090:8080
 ou
 minikube service apache-service
 
-````
+
 # Dockorize notre application nodejs  dans dockerhub
   1. docker build . -t hamzabedwi/k8s-webserver-node
   2. docker image ls
@@ -134,8 +133,7 @@ kubectl get pods two-container-pod -o jsonpath='{.spec.containers[*].name}'
 6. kubectl expose deploy app1 --port=80 --type=NodePort
 7. kubectl expose deploy app2 --port=8080 --type=NodePort
 8. display services with ip addresse: $> kubectl get svc
-9. ````
-    NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+9.  NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
     app1         NodePort    10.106.57.189   <none>        80:32608/TCP     77s
     app2         NodePort    10.100.56.171   <none>        8080:31471/TCP   56s
     app3         NodePort    10.110.160.73   <none>        8080:30997/TCP   45s
