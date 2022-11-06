@@ -173,3 +173,6 @@ to verify:
     minikube ssh
         curl ahly.io
         curl zamalek.io
+```
+## Resetting Minikube Cluster | Kubernetes
+kubectl delete all --all -n default
